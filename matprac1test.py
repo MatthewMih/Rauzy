@@ -42,18 +42,33 @@ T0 = ABCTriangle([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 T = ABCTriangle([[1./2., 1./2., 0], [1./2., 0, 1./2.], [0, 1./2., 1./2.]])
 ax.add_patch(plt.Polygon(T.getXYcoords(), True, color = 'black'))
 
+
+
+
 prevTriangles = []
 prevTriangles.append(T)
-
+tmp = []
 for k in range(N):
-  tmp = []
+  tmp.append([])
+
   for i in range(3 ** k):
-    tmp.append(prevTriangles[i].newABCTriangle1())
-    tmp.append(prevTriangles[i].newABCTriangle2())
-    tmp.append(prevTriangles[i].newABCTriangle3())
-  for t in tmp:
-    ax.add_patch(plt.Polygon(rescale(t.getXYcoords(), 0.99), True, color = 'black'))
-    #ax.add_line(mp.lines.Line2D ([t.getXYcoords()[0][0], t.getXYcoords()[1][0], t.getXYcoords()[2][0], t.getXYcoords()[0][0]], [t.getXYcoords()[0][1], t.getXYcoords()[1][1], t.getXYcoords()[2][1], t.getXYcoords()[0][1]], color="green")) 
-  prevTriangles = tmp
+    tmp[k].append(prevTriangles[i].newABCTriangle1())
+    tmp[k].append(prevTriangles[i].newABCTriangle2())
+    tmp[k].append(prevTriangles[i].newABCTriangle3())
+  prevTriangles = tmp[k]
+
+#i = N - 1
+#while i > 0:
+#  for j in range(3 ** i):
+#    ax.add_patch(plt.Polygon(rescale(tmp[i][j].getXYcoords(), 1), color = 'black'))
+#  i -= 1
+
+
+for t in tmp:
+  for tt in t:
+    ax.add_patch(plt.Polygon(rescale(tt.getXYcoords(), 1), color = 'black'))
+for t in tmp:
+  for tt in t:
+    ax.add_line(mp.lines.Line2D ([tt.getXYcoords()[0][0], tt.getXYcoords()[1][0], tt.getXYcoords()[2][0], tt.getXYcoords()[0][0]], [tt.getXYcoords()[0][1], tt.getXYcoords()[1][1], tt.getXYcoords()[2][1], tt.getXYcoords()[0][1]], color="white"))
 
 plt.show()

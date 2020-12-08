@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as manimation
 
 N = 5 #number of iterations
-maxSideLength = 0.03 #drawing condition -- length of side < maxSideLength
+maxSideLength = 0.03 #drawing condition: length of the biggest side > maxSideLength
 
 def ABCtoXY(ABCvertex): #It's function of coordinates transform (a:b:c) -> (x, y)
   u = ABCvertex[0] / (ABCvertex[0] + ABCvertex[1] + ABCvertex[2])
